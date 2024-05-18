@@ -1,0 +1,44 @@
+﻿@model IEnumerable<dotnetblog.Models.Post>
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <h2> @Html.DisplayFor(modelItem => item.Title)</h2>
+                <small>@Html.DisplayFor(modelItem => item.CreatedDate)</small>
+            </div>
+
+
+            <div class="mt-4 mb-4">
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@Url.Content("~/" + item.ImageUrl)" alt="@item.Title" style="max-width: 500px; max-height: 200px;" />
+                }
+            </div
+
+        
+
+            <p>@Html.DisplayFor(modelItem => item.Body)</p>
+            <small>Category: @Html.DisplayFor(modelItem => item.Category.Name)</small>
+         
+
+       
+            <div class="mt-2">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </li>
+    }
+</ul>
